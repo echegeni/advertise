@@ -38,6 +38,9 @@ class city(models.Model):
     title = models.CharField(max_length=100, verbose_name="اسم شهر")
     slug = models.SlugField(max_length=30, verbose_name='آدرس')
 
+    def get_absolute_url(self):
+        return reverse('city-detail')
+
     def __str__(self):
         return self.title
 
