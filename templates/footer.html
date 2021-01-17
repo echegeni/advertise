@@ -1,0 +1,203 @@
+{% load static %}
+<footer class="footer-three footer-grey p-top-95">
+    <div class="footer-top p-bottom-25">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-sm-6">
+
+                    <div class="widget widget_pages">
+                        <h2 class="widget-title">اطلاعات شرکت</h2>
+                        <ul class="list-unstyled">
+
+                            <li class="page-item"><a href="#">درباره ما</a></li>
+
+
+                            <li class="page-item"><a href="#">تماس با ما</a></li>
+
+
+                            <li class="page-item"><a href="#">آگهی های ما</a></li>
+
+
+                            <li class="page-item"><a href="#">قیمت گذاری ما</a></li>
+
+
+                            <li class="page-item"><a href="#">پشتیبانی</a></li>
+
+
+                            <li class="page-item"><a href="#">حریم خصوصی</a></li>
+
+                        </ul>
+                    </div>
+
+                </div><!-- ends: .col-lg-3 -->
+                <div class="col-lg-3 d-flex justify-content-lg-center  col-sm-6">
+
+                    <div class="widget widget_pages">
+                        <h2 class="widget-title">لینک های مفید</h2>
+                        <ul class="list-unstyled">
+
+                            <li class="page-item"><a href="#">عضویت دیرو</a></li>
+
+
+                            <li class="page-item"><a href="#">ورود</a></li>
+
+
+                            <li class="page-item"><a href="#">چطور کار میکند</a></li>
+
+
+                            <li class="page-item"><a href="#">مزایا</a></li>
+
+
+                            <li class="page-item"><a href="#">برنامه دیرو</a></li>
+
+
+                            <li class="page-item"><a href="#">بسته ها</a></li>
+
+                        </ul>
+                    </div>
+
+                </div><!-- ends: .col-lg-3 -->
+                <div class="col-lg-3 col-sm-6">
+
+                    <div class="widget widget_social">
+                        <h2 class="widget-title">تماس با ما</h2>
+
+                        <ul class="list-unstyled social-list">
+                            <li><a href="#"><span class="mail"><i class="la la-envelope"></i></span> پشتیبانی تماس</a>
+                            </li>
+                            <li><a href="#"><span class="twitter"><i class="fab fa-twitter"></i></span> توییتر</a></li>
+                            <li><a href="#"><span class="facebook"><i class="fab fa-facebook-f"></i></span> فیسبوک</a>
+                            </li>
+                            <li><a href="#"><span class="instagram"><i class="fab fa-instagram"></i></span>
+                                اینستاگرام</a></li>
+                            <li><a href="#"><span class="gplus"><i class="fab fa-google-plus-g"></i></span> گوگل+</a>
+                            </li>
+                        </ul>
+
+                    </div><!-- ends: .widget -->
+
+                </div><!-- ends: .col-lg-3 -->
+                <div class="col-lg-4 col-sm-6">
+
+                    <div class="widget widget_text">
+                        <h2 class="widget-title">دیرو روی موبایل</h2>
+                        <div class="textwidget">
+                            <p>امروز برنامه دیرو را دانلود کنید، و رویدادهای خود را در هر زمان و هر کجا پیدا کنید.</p>
+                            <ul class="list-unstyled store-btns">
+                                <li><a href="#"
+                                       class="btn-gradient btn-gradient-two btn btn-md btn-icon icon-left"><span
+                                        class="fab fa-apple"></span> اپ استور</a></li>
+                                <li><a href="#" class="btn btn-dark btn-md btn-icon btn-icon"><span
+                                        class="fab fa-android"></span> گوگل پلی</a></li>
+                            </ul>
+                        </div>
+                    </div><!-- ends: .widget -->
+
+                </div><!-- ends: .col-lg-3 -->
+            </div>
+        </div>
+    </div><!-- ends: .footer-top -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-bottom--content">
+                        <a href="#" class="footer-logo"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                        <p class="m-0 copy-text">©2019 دیرو. بومی شده با <span class="la la-heart-o"></span> توسط <a
+                                href="#">آرش خادملو</a></p>
+                        <ul class="list-unstyled lng-list">
+                            <li><a href="https://www.rtl-theme.com/">راست چین</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- ends: .footer-bottom -->
+</footer><!-- ends: .footer -->
+
+
+<div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="login_modal_label"><i class="la la-lock"></i> ورود</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="بستن">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="https://www.rtl-theme.com/author/paradigmshift/" id="login-form">
+                    <input type="text" class="form-control" placeholder="نام کاربری یا ایمیل" required>
+                    <input type="password" class="form-control" placeholder="رمزعبور" required>
+                    <div class="keep_signed custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                        <input type="checkbox" class="custom-control-input" name="keep_signed_in" value="1"
+                               id="keep_signed_in">
+                        <label for="keep_signed_in" class="not_empty custom-control-label">در همین حالت نگه
+                            دارید</label>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-lg btn-gradient btn-gradient-two">ورود</button>
+                </form>
+
+                <div class="form-excerpts">
+                    <ul class="list-unstyled">
+                        <li>عضو نیستید؟ <a href="#">ثبت نام</a></li>
+                        <li><a href="#">بازیابی رمزعبور</a></li>
+                    </ul>
+                    <div class="social-login">
+                        <span>یا اتصال با</span>
+                        <p><a href="#" class="btn btn-outline-secondary"><i class="fab fa-facebook-f"></i> فیسبوک</a><a
+                                href="#" class="btn btn-outline-danger"><i class="fab fa-google-plus-g"></i> گوگل</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="signup_modal" tabindex="-1" role="dialog" aria-labelledby="signup_modal_label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signup_modal_label"><i class="la la-lock"></i> ثبت نام</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="https://www.rtl-theme.com/author/paradigmshift/" id="signup-form">
+                    <input type="email" class="form-control" placeholder="ایمیل" required>
+                    <input type="password" class="form-control" placeholder="رمزعبور" required>
+                    <button type="submit" class="btn btn-block btn-lg btn-gradient btn-gradient-two">ثبت نام</button>
+                </form>
+
+                <div class="form-excerpts">
+                    <ul class="list-unstyled">
+                        <li>قبلا عضو شدید؟ <a href="#">ورود</a></li>
+                        <li><a href="#">بازیابی رمزعبور</a></li>
+                    </ul>
+                    <div class="social-login">
+                        <span>یا ثبت نام با</span>
+                        <p><a href="#" class="btn btn-outline-secondary"><i class="fab fa-facebook-f"></i> فیسبوک</a><a
+                                href="#" class="btn btn-outline-danger"><i class="fab fa-google-plus-g"></i> گوگل</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0C5etf1GVmL_ldVAichWwFFVcDfa1y_c"></script>
+<!-- inject:js-->
+<script src="{% static 'js/plugins.min.js' %}"></script>
+<script src="{% static 'js/script.min.js' %}"></script>
+<!-- endinject-->
