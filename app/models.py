@@ -2,6 +2,7 @@ from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from django.urls import reverse
 from phone_field import PhoneField
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -12,6 +13,8 @@ class Category(MPTTModel):
     title = models.CharField(max_length=50, verbose_name="عنوان")
     slug = models.SlugField(null=False, unique=True, verbose_name="اسلاگ")
     image = models.ImageField(upload_to='media/city/', verbose_name='تصویر شهر', blank=True)
+    fav = models.BooleanField(default=False, verbose_name='محبوب', blank=True)
+
 
     def __str__(self):
         return self.title
@@ -38,6 +41,7 @@ class Category(MPTTModel):
 class city(models.Model):
     title = models.CharField(max_length=100, verbose_name="اسم شهر")
     slug = models.SlugField(max_length=30, verbose_name='آدرس')
+    fav = models.BooleanField(default=False, verbose_name='محبوب', blank=True)
 
     def get_absolute_url(self):
         return reverse('city-list')
@@ -65,6 +69,7 @@ class ImageGallery(models.Model):
 
 
 class advertise(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
     title = models.CharField(max_length=100, verbose_name='عنوان آکهی')
     content = models.TextField(verbose_name="توضیحات")
     publish_date = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ انتشار")
