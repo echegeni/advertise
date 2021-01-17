@@ -7,4 +7,4 @@ from django.views.generic import *
 
 class HomeView(TemplateView):
     model = advertise
-    template_name = 'home.html'
+    template_name = "home.html"
