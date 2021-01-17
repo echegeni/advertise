@@ -11,6 +11,7 @@ class Category(MPTTModel):
                             verbose_name="فرزند")
     title = models.CharField(max_length=50, verbose_name="عنوان")
     slug = models.SlugField(null=False, unique=True, verbose_name="اسلاگ")
+    image = models.ImageField(upload_to='media/city/', verbose_name='تصویر شهر', blank=True)
 
     def __str__(self):
         return self.title
@@ -19,7 +20,7 @@ class Category(MPTTModel):
         order_insertion_by = ['title']
 
     def get_absolute_url(self):
-        return reverse('category_detail', kwargs={'slug': self.slug})
+        return reverse('category_list', kwargs={'slug': self.slug})
 
     def __str__(self):  # __str__ method elaborated later in
         full_path = [self.title]  # post.  use __unicode__ in place of
@@ -39,7 +40,7 @@ class city(models.Model):
     slug = models.SlugField(max_length=30, verbose_name='آدرس')
 
     def get_absolute_url(self):
-        return reverse('city-detail')
+        return reverse('city-list')
 
     def __str__(self):
         return self.title
