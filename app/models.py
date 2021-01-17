@@ -12,9 +12,9 @@ class Category(MPTTModel):
                             verbose_name="فرزند")
     title = models.CharField(max_length=50, verbose_name="عنوان")
     slug = models.SlugField(null=False, unique=True, verbose_name="اسلاگ")
-    image = models.ImageField(upload_to='media/city/', verbose_name='تصویر شهر', blank=True)
+    image = models.ImageField(upload_to='media/cat/', verbose_name='تصویر دسته', blank=True)
     fav = models.BooleanField(default=False, verbose_name='محبوب', blank=True)
-
+    icon = models.CharField(max_length=20, blank=True, verbose_name='آیکون')
 
     def __str__(self):
         return self.title
@@ -41,6 +41,7 @@ class Category(MPTTModel):
 class city(models.Model):
     title = models.CharField(max_length=100, verbose_name="اسم شهر")
     slug = models.SlugField(max_length=30, verbose_name='آدرس')
+    image = models.ImageField(upload_to='media/city/', verbose_name='تصویر شهر', blank=True)
     fav = models.BooleanField(default=False, verbose_name='محبوب', blank=True)
 
     def get_absolute_url(self):
