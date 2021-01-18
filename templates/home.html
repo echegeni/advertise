@@ -54,7 +54,7 @@
                                             <div class="collapse navbar-collapse" id="direo-navbar-collapse">
                                                 <ul class="navbar-nav">
                                                     <li>
-                                                        <a href="index.html">خانه</a>
+                                                        <a href="{% url 'home' %}">خانه</a>
                                                     </li>
                                                     <li class="dropdown has_dropdown">
                                                         <a href="#" class="dropdown-toggle" id="drop3" role="button"
@@ -128,36 +128,6 @@
 
 
                                 <div class="menu-right order-lg-2 order-sm-2">
-                                    <div class="search-wrapper">
-                                        <div class="nav_right_module search_module">
-                                            <span class="icon-left" id="basic-addon9"><i
-                                                    class="la la-search"></i></span>
-                                            <div class="search_area">
-                                                <form action="https://www.rtl-theme.com/author/paradigmshift/">
-                                                    <div class="input-group input-group-light">
-                                                        <input type="text"
-                                                               class="form-control search_field top-search-field"
-                                                               placeholder="به دنبال چه چیزی هستید؟" autocomplete="off">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="search-categories">
-                                            <ul class="list-unstyled">
-                                                <li><a href="#"><span class="la la-glass bg-danger"></span> غذا و
-                                                    نوشیدنی</a></li>
-                                                <li><a href="#"><span class="la la-cutlery bg-primary"></span>
-                                                    رستوران</a></li>
-                                                <li><a href="#"><span class="la la-map-marker bg-success"></span> مکان
-                                                    ها</a></li>
-                                                <li><a href="#"><span class="la la-shopping-cart bg-secondary"></span>
-                                                    خرید و فروشگاه</a></li>
-                                                <li><a href="#"><span class="la la-bed bg-info"></span> هتل</a></li>
-                                                <li><a href="#"><span class="la la-bank bg-warning"></span> تاریخ و هنر</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div><!-- ends: .search-wrapper -->
                                     <!-- start .author-area -->
                                     <div class="author-area">
                                         <div class="author__access_area">
@@ -169,10 +139,13 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{% url 'register' %}" class="access-link">ورود</a>
-                                                    <span>یا</span>
-                                                    <a href="{% url 'register' %}" class="access-link">ثبت نام</a>
-
+                                                    {% if user.is_authenticated %}
+                                                        <a href="#" class="access-link">پنل کاربری</a>
+                                                    {% else %}
+                                                        <a href="{% url 'register' %}" class="access-link">ورود</a>
+                                                        <span>یا</span>
+                                                        <a href="{% url 'register' %}" class="access-link">ثبت نام</a>
+                                                    {% endif %}
                                                 </li>
                                             </ul>
                                         </div>
@@ -239,7 +212,7 @@
                                 <select class="search_fields" name="q" id="at_biz_dir-category">
                                     <option value="">انتخاب یک دسته</option>
                                     {% for cat in category %}
-                                    <option value="{{ cat.title }}">{{ cat.title }}</option>
+                                        <option value="{{ cat.title }}">{{ cat.title }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -247,7 +220,7 @@
                                 <select class="search_fields" name="q" id="at_biz_dir-location">
                                     <option value="">انتخاب یک مکان</option>
                                     {% for city in city %}
-                                    <option value="{{ city.title }}">{{ city.title }}</option>
+                                        <option value="{{ city.title }}">{{ city.title }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -497,7 +470,7 @@
                 <div class="place-list-wrapper">
                     <ul class="list-unstyled">
                         {% for city in city %}
-                            <li><a href="{% url "city-list" %}">{{ city.title }}</a></li>
+                            <li><a href="#">{{ city.title }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
