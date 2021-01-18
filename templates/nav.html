@@ -1,10 +1,6 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-
-
-<!-- Mirrored from rtl-preview.ir/RTL/direo/author-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 Jan 2021 21:03:57 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,9 +17,8 @@
 </head>
 <body>
 
-
-<section class="header-breadcrumb bgimage overlay overlay--dark">
-    <div class="bg_image_holder"><img src="{% static 'img/breadcrumb1.jpg' %}" alt=""></div>
+<section class="listing-details-wrapper bgimage">
+    <div class="bg_image_holder"><img src="{% static 'img/details-img.jpg' %}" alt=""></div>
     <div class="mainmenu-wrapper">
 
 
@@ -35,8 +30,9 @@
                             <div class="menu-fullwidth">
                                 <div class="logo-wrapper order-lg-0 order-sm-1">
                                     <div class="logo logo-top">
-                                        <a href="index.html"><img src="{% static 'img/logo-white.png' %}" alt="logo image"
-                                                                  class="img-fluid"></a>
+                                        <a href="{% url 'home' %}"><img
+                                                src="{% static 'img/logo-white.png' %}" alt="logo image"
+                                                                  class=" img-fluid"></a>
                                     </div>
                                 </div><!-- ends: .logo-wrapper -->
 
@@ -55,7 +51,7 @@
                                             <div class="collapse navbar-collapse" id="direo-navbar-collapse">
                                                 <ul class="navbar-nav">
                                                     <li>
-                                                        <a href="index.html">خانه</a>
+                                                        <a href="{% url 'home' %}">خانه</a>
                                                     </li>
                                                     <li class="dropdown has_dropdown">
                                                         <a href="#" class="dropdown-toggle" id="drop3" role="button"
@@ -187,7 +183,7 @@
                                         <div class="offcanvas-menu__contents">
                                             <a href="#" class="offcanvas-menu__close"><i class="la la-times-circle"></i></a>
                                             <div class="author-avatar">
-                                                <img src="{% static 'img/author-avatar.png' %}" alt="" class="rounded-circle">
+                                                <img src="img/author-avatar.png" alt="" class="rounded-circle">
                                             </div>
                                             <ul class="list-unstyled">
                                                 <li><a href="dashboard-listings.html">پروفایل من</a></li>
@@ -220,21 +216,3 @@
         </div>
 
     </div><!-- ends: .mainmenu-wrapper -->
-
-    <div class="breadcrumb-wrapper content_above">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h1 class="page-title">پروفایل نویسنده</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">خانه</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">همه آگهی ها</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div><!-- ends: .breadcrumb-wrapper -->
-
-</section>

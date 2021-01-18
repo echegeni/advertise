@@ -1,5 +1,6 @@
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+from django.utils.encoding import uri_to_iri
 from .models import *
 from django.views.generic import *
 
@@ -31,14 +32,31 @@ class Search_Detail(ListView):
         return object_list
 
 
+class AdvertiseDisplay(DetailView):
+    model = advertise
+    template_name = 'ad_detail.html'
+
+    def get_object(self, **kwargs):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(advertise, slug=uri_to_iri(slug))
+
+
 # city model views
 
-class CityList(ListView):
-    model = city
+class City_List(ListView):
+    model = advertise
     template_name = "City/CityList.html"
+
+    def get_queryset(self):
+        querysert = advertise.objects.filter(city__slug=uri_to_iri(self.kwargs.get('slug')))
+        return querysert
 
 
 # category model views
 class Category_List(ListView):
-    model = Category
+    model = advertise
     template_name = "Category/CategoryList.html"
+
+    def get_queryset(self):
+        queryset = advertise.objects.filter(category__slug=uri_to_iri(self.kwargs.get('slug')))
+        return queryset
