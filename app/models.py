@@ -40,7 +40,7 @@ class Category(MPTTModel):
 
 class city(models.Model):
     title = models.CharField(max_length=100, verbose_name="اسم شهر")
-    slug = models.SlugField(max_length=30, verbose_name='آدرس')
+    slug = models.SlugField(max_length=30, verbose_name='اسلاگ')
     image = models.ImageField(upload_to='media/city/', verbose_name='تصویر شهر', blank=True)
     fav = models.BooleanField(default=False, verbose_name='محبوب', blank=True)
 
@@ -71,6 +71,7 @@ class ImageGallery(models.Model):
 
 class advertise(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
+    slug = models.SlugField(max_length=30, verbose_name='اسلاگ', blank=True, auto_created=True)
     title = models.CharField(max_length=100, verbose_name='عنوان آکهی')
     content = models.TextField(verbose_name="توضیحات")
     publish_date = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ انتشار")
@@ -82,12 +83,15 @@ class advertise(models.Model):
     phone = PhoneField(verbose_name="شماره تماس")
     email = models.EmailField(verbose_name='ایمیل')
     address = models.CharField(max_length=200, null=True, blank=True, verbose_name='آدرس')
+    video = models.FileField(upload_to='upload/product/video', verbose_name="ویدئو", blank=True)
+
+    # geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='موقعیت جغرافیایی')
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('advertise-detail')
+        return reverse('advertise-detail', args=[self.slug])
 
     class Meta:
         verbose_name = 'آگهی'
