@@ -1,8 +1,11 @@
+from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils.encoding import uri_to_iri
 from .models import *
 from django.views.generic import *
+from .forms import *
+from django.views.generic.detail import SingleObjectMixin
 
 
 # Create your views here.
@@ -17,6 +20,7 @@ class HomeView(TemplateView):
         context['favcity'] = city.objects.filter(fav=True)
         context['favcat'] = Category.objects.filter(fav=True)
         context['category'] = Category.objects.all()
+        context['advertise'] = advertise.objects.all()
         return context
 
 
@@ -39,6 +43,48 @@ class AdvertiseDisplay(DetailView):
     def get_object(self, **kwargs):
         slug = self.kwargs.get('slug')
         return get_object_or_404(advertise, slug=uri_to_iri(slug))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['advertise_list'] = advertise.objects.all()
+        context['comment_form'] = CommentForm()
+        context['comments'] = self.object.comment_set.filter(is_active=True)
+        context['category'] = Category.objects.all()
+        return context
+
+
+class Comment(SingleObjectMixin, FormView):
+    template_name = 'ad_detail.html'
+    form_class = CommentForm
+    model = advertise
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        new_form = form.save(commit=False)
+        new_form.advertise = self.object
+        new_form.save()
+        messages.info(self.request, message="نظر شما با موفقیت ثبت شد، در اولین فرصت بررسی میکنیم.")
+        return super(Comment, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('advertise-detail', kwargs={'slug': self.object.slug})
+
+    def get_object(self, **kwargs):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(advertise, slug=uri_to_iri(slug))
+
+
+class AdsandComment(View):
+    def get(self, requset, *args, **kwargs):
+        view = AdvertiseDisplay.as_view()
+        return view(requset, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        view = Comment.as_view()
+        return view(request, *args, **kwargs)
 
 
 # city model views

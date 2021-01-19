@@ -331,189 +331,75 @@
                         </div>
                     </div><!-- ends: .atbd_content_module -->
 
-
-                    <div class="atbd_content_module atbd_review_module">
-                        <div class="atbd_content_module__tittle_area">
-                            <div class="atbd_area_title">
-                                <h4><span class="la la-star-o"></span>4 بررسی</h4>
-                                <label for="review_content"
-                                       class="btn btn-secondary btn-icon-left btn-sm not_empty"><span
-                                        class="la la-star-o"></span> افزودن یک بررسی</label>
+                    {% if advertise.is_active_comment %}
+                        <div class="atbd_content_module atbd_review_module">
+                            <div class="atbd_content_module__tittle_area">
+                                <div class="atbd_area_title">
+                                    <h4><span class="la la-star-o"></span>نظرات</h4>
+                                    <label for="review_content"
+                                           class="btn btn-secondary btn-icon-left btn-sm not_empty"><span
+                                            class="la la-star-o"></span> افزودن یک نظر</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="atbdb_content_module_contents">
-                            <div id="client_review_list">
-                                <div class="atbd_single_review atbdp_static">
-                                    <div class="atbd_review_top">
-                                        <div class="atbd_avatar_wrapper">
-                                            <div class="atbd_review_avatar"><img alt=""
-                                                                                 src="{% static 'img/review-author-thumb.jpg' %}"
-                                                                                 class="avatar avatar-32 photo"></div>
-                                            <div class="atbd_name_time">
-                                                <p>آرش خادملو</p>
-                                                <span class="review_time">6 ساعت پیش</span>
-                                            </div>
-                                        </div>
-                                        <div class="atbd_rated_stars">
-                                            <ul>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_disable"></span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="review_content">
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                            طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                                            لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود
-                                            ابزارهای کاربردی می باشد</p>
-                                        <a href="#" class="reply"><span class="la la-mail-reply-all"></span>پاسخ</a>
-                                    </div>
-                                    <div class="review_reply_form">
-                                        <div class="atbd_review_avatar"><img alt="" src="{% static 'img/review-author-thumb2.jpg' %}"
-                                                                             class="avatar avatar-32 photo"></div>
-                                        <form action="http://aazztech.com/">
-                                            <textarea placeholder="Message" class="form-control"></textarea>
-                                            <button class="btn btn-sm btn-secondary">پاسخ</button>
-                                        </form>
-                                    </div>
-
-                                    <!-- comment depth 2 -->
-                                    <div class="media-depth2">
-                                        <div class="atbd_single_review">
+                            {% for comment in comments %}
+                                <div class="atbdb_content_module_contents">
+                                    <div id="client_review_list">
+                                        <div class="atbd_single_review atbdp_static">
                                             <div class="atbd_review_top">
                                                 <div class="atbd_avatar_wrapper">
                                                     <div class="atbd_review_avatar"><img alt=""
-                                                                                         src="{% static 'img/review-author-thumb2.jpg' %}"
+                                                                                         src="{% static 'img/review-author-thumb3.jpg' %}"
                                                                                          class="avatar avatar-32 photo">
                                                     </div>
                                                     <div class="atbd_name_time">
-                                                        <p>آرش خادملو</p>
-                                                        <span class="review_time">6 ساعت پیش</span>
+                                                        <p>{{ comment.user }}</p>
+                                                        <span class="review_time">{{ comment.date_created|date:"Y-m-d" }}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="review_content">
-                                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                                                    استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در
-                                                    ستون و سطرآنچنان</p>
-                                                <a href="#" class="reply"><span class="la la-mail-reply-all"></span>پاسخ</a>
-                                            </div>
-                                            <div class="review_reply_form">
-                                                <div class="atbd_review_avatar"><img alt=""
-                                                                                     src="{% static 'img/review-author-thumb.jpg' %}"
-                                                                                     class="avatar avatar-32 photo">
-                                                </div>
-                                                <form action="http://aazztech.com/">
-                                                    <textarea placeholder="Message" class="form-control"></textarea>
-                                                    <button class="btn btn-sm btn-secondary">پاسخ</button>
-                                                </form>
+                                                <p>{{ comment.comment }}</p>
                                             </div>
                                         </div><!-- ends: .atbd_single_review -->
-                                    </div><!-- ends: .media-depth2 -->
-
-                                </div><!-- ends:.atbd_single_review -->
-
-                                <div class="atbd_single_review atbdp_static">
-                                    <div class="atbd_review_top">
-                                        <div class="atbd_avatar_wrapper">
-                                            <div class="atbd_review_avatar"><img alt=""
-                                                                                 src="{% static 'img/review-author-thumb3.jpg' %}"
-                                                                                 class="avatar avatar-32 photo"></div>
-                                            <div class="atbd_name_time">
-                                                <p>آرش خادملو</p>
-                                                <span class="review_time">6 ساعت پیش</span>
-                                            </div>
-                                        </div>
-                                        <div class="atbd_rated_stars">
-                                            <ul>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="review_content">
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                            طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                                            لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود
-                                            ابزارهای کاربردی می باشد</p>
-                                        <a href="#" class="reply"><span class="la la-mail-reply-all"></span>پاسخ</a>
-                                    </div>
-                                    <div class="review_reply_form">
-                                        <div class="atbd_review_avatar"><img alt="" src="{% static 'img/review-author-thumb2.jpg' %}"
-                                                                             class="avatar avatar-32 photo"></div>
-                                        <form action="http://aazztech.com/">
-                                            <textarea placeholder="Message" class="form-control"></textarea>
-                                            <button class="btn btn-sm btn-secondary">پاسخ</button>
-                                        </form>
-                                    </div>
-                                </div><!-- ends: .atbd_single_review -->
-                            </div><!-- ends: .client_review_list -->
-                        </div>
-                    </div><!-- ends: .atbd_content_module -->
+                                    </div><!-- ends: .client_review_list -->
+                                </div>
+                            {% endfor %}
+                        </div><!-- ends: .atbd_content_module -->
 
 
-                    <div class="atbd_content_module atbd_review_form">
-                        <div class="atbd_content_module__tittle_area">
-                            <div class="atbd_area_title">
-                                <h4><span class="la la-star"></span>افزودن یک بررسی</h4>
+                        <div class="atbd_content_module atbd_review_form">
+                            <div class="atbd_content_module__tittle_area">
+                                <div class="atbd_area_title">
+                                    <h4><span class="la la-star"></span>افزودن یک بررسی</h4>
+                                </div>
                             </div>
-                        </div>
-                        <div class="atbdb_content_module_contents atbd_give_review_area">
-                            <div class="atbd_notice alert alert-info" role="alert">
-                                <span class="la la-info" aria-hidden="true"></span>
-                                شما باید وارد <a href="#">شوید</a> یا <a href="#">ثبت نام کنید</a> برای ارسال یک بررسی
-                            </div><!-- ends: .atbd_notice -->
 
-                            <form action="http://aazztech.com/" id="atbdp_review_form" method="post">
-                                <div class="atbd_review_rating_area"> <!--It should be displayed on the left side -->
-                                    <div class="atbd_review_update_rating">
-                                        <span>امتیاز: </span>
-                                        <div class="atbd_rating_stars">
-                                            <div class="br-wrapper br-theme-fontawesome-stars m-left-15">
-                                                <select class="give_rating"> <!-- now hidden -->
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div><!-- ends: .atbd_review_update_rating -->
-                                </div><!-- ends: .atbd_review_rating_area -->
+                            <div class="atbdb_content_module_contents atbd_give_review_area">
+                                <div class="atbd_notice alert alert-info" role="alert">
+                                    <span class="la la-info" aria-hidden="true"></span>
+                                    شما باید وارد <a href="#">شوید</a> یا <a href="#">ثبت نام کنید</a> برای ارسال یک
+                                    بررسی
+                                </div><!-- ends: .atbd_notice -->
 
-                                <div class="form-group">
-                                    <textarea name="content" id="review_content" class="form-control" placeholder="پیام"
-                                              required></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <div id="atbd_up_preview"></div>
-                                    <div class="atbd_upload_btn_wrap">
-                                        <label for="atbd_review_attachment">
-                                            <input type="file" id="atbd_review_attachment" hidden multiple>
-                                            <span class="btn btn-md atbd_upload_btn"><span
-                                                    class="la la-cloud-upload"></span>آپلود عکس</span>
-                                        </label>
-                                        <span id="file_name"></span>
+                                <form action="." id="atbdp_review_form" method="post">
+                                    <div class="form-group">
+                                        {{ comment_form }}
+                                        {% csrf_token %}
+                                        <textarea name="content" id="review_content" class="form-control"
+                                                  placeholder="پیام"
+                                                  required></textarea>
                                     </div>
-                                </div>
+                                    <!--If current user has a review then show him update and delete button-->
+                                    <button class="btn btn-gradient btn-gradient-one" type="submit"
+                                            id="atbdp_review_form_submit">ارسال بررسی
+                                    </button> <!-- submit button -->
+                                </form>
 
-                                <!--If current user has a review then show him update and delete button-->
-                                <button class="btn btn-gradient btn-gradient-one" type="submit"
-                                        id="atbdp_review_form_submit">ارسال بررسی
-                                </button> <!-- submit button -->
-                            </form>
 
-                        </div><!-- ends: .atbd_give_review_area -->
-                    </div><!-- ends: .atbd_content_module -->
+                            </div><!-- ends: .atbd_give_review_area -->
 
+                        </div><!-- ends: .atbd_content_module -->
+                    {% endif %}
                 </div>
                 <div class="col-lg-4 mt-5 mt-lg-0">
 
@@ -570,93 +456,18 @@
                     </div><!-- ends: .widget -->
 
 
-                    <div class="widget atbd_widget widget_claim_listing">
-                        <a href="#" class="btn btn-block btn-gradient btn-gradient-two btn-lg claim-btn"
-                           data-toggle="modal" data-target="#moda_claim_listing">درخواست این کسب و کار</a>
-                    </div><!-- ends: .widget -->
-
-
-                    <div class="widget atbd_widget widget-card">
-                        <div class="atbd_widget_title">
-                            <h4><span class="la la-clock-o"></span> ساعت های کاری</h4>
-                            <span class="badge badge-success">اکنون باز</span>
-                        </div><!-- ends: .atbd_widget_title -->
-                        <div class="directory_open_hours">
-                            <ul>
-                                <li class="atbd_open">
-                                    <span class="day">دوشنبه</span>
-                                    <div class="atbd_open_close_time">
-                                        <span class="time">10:00 صبح</span> - <span class="time">06:00 غروب</span>
-                                    </div>
-                                </li>
-                                <li class="atbd_open atbd_today">
-                                    <span class="day">سه شنبه</span>
-                                    <div class="atbd_open_close_time">
-                                        <span class="time">10:00 صبح</span> - <span class="time">06:00 غروب</span>
-                                    </div>
-                                </li>
-                                <li class="atbd_open">
-                                    <span class="day">چهارشنبه</span>
-                                    <div class="atbd_open_close_time">
-                                        <span class="time">09:00 صبح</span> - <span class="time">06:00 غروب</span>
-                                    </div>
-                                </li>
-                                <li class="atbd_open">
-                                    <span class="day">پنج شنبه</span>
-                                    <div class="atbd_open_close_time">
-                                        <span class="time">10:00 صبح</span> - <span class="time">06:00 غروب</span>
-                                    </div>
-                                </li>
-                                <li class="atbd_open">
-                                    <span class="day">جمعه</span>
-                                    <div class="atbd_open_close_time">
-                                        <span class="time">09:00 صبح</span> - <span class="time">06:00 غروب</span>
-                                    </div>
-                                </li>
-                                <li class="atbd_closed">
-                                    <span class="day">شنبه</span>
-                                    <span>بسته</span>
-                                </li>
-                                <li class="atbd_closed">
-                                    <span class="day">یکشنبه</span>
-                                    <span>بسته</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- ends: .widget -->
-
-
                     <div class="widget atbd_widget widget-card">
                         <div class="atbd_widget_title">
                             <h4><span class="la la-bookmark"></span> دسته با آیکون</h4>
                         </div><!-- ends: /.atbd_widget_title -->
                         <div class="widget-body atbdp-widget-categories">
                             <ul class="atbdp_parent_category">
-                                <li>
-                                    <a href="#"><span class="la la-money"></span>کسب و کار</a>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="la la-heartbeat"></span>مراقبت های بهداشتی</a>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="la la-laptop"></span>فن اوری</a>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="la la-eject"></span>کنفرانس</a>
-                                    <span class="cat-trigger"></span>
-                                    <ul class="atbdp_child_category">
-                                        <li><a href="#">رویداد</a></li>
-                                        <li><a href="#">ملاقات</a></li>
-                                        <li><a href="#">ورزشی</a></li>
-                                        <li><a href="#">کسب و کار</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="la la-leaf"></span>کشاورزی</a>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="la la-calculator"></span>غذا و تناسب اندام</a>
-                                </li>
+                                {% for cat in category %}
+                                    <li>
+                                        <a href="{{ cat.get_absolute_url }}"><span
+                                                class="{{ cat.icon }}"></span>{{ cat.title }}</a>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </div><!-- ends: .atbdp -->
                     </div><!-- ends: .widget -->
@@ -681,234 +492,32 @@
                         </div><!-- ends: .widget-body -->
                     </div><!-- ends: .widget -->
 
-                    <div class="widget atbd_widget widget-card">
-                        <div class="atbd_widget_title">
-                            <h4><span class="la la-envelope"></span> فرم نوار کناری</h4>
-                        </div><!-- ends: .atbd_widget_title -->
-                        <div class="atbdp-widget-listing-contact">
-                            <form id="atbdp-contact-form" class="form-vertical" role="form">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="atbdp-contact-name" placeholder="نام"
-                                           required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" id="atbdp-contact-email"
-                                           placeholder="ایمیل" required="">
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" id="atbdp-contact-message" rows="3"
-                                              placeholder="پیام" required=""></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-outline-secondary btn-block">تماس با نماینده
-                                </button>
-                            </form>
-                        </div><!-- ends: .atbdp-widget-listing-contact -->
-                    </div><!-- ends: .widget -->
+
 
 
                     <div class="widget atbd_widget widget-card">
                         <div class="atbd_widget_title">
-                            <h4><span class="la la-list-alt"></span> آگهی های مشابه</h4>
-                            <a href="#">نمایش همه</a>
-                        </div><!-- ends: .atbd_widget_title -->
-                        <div class="atbd_categorized_listings atbd_similar_listings">
-                            <ul class="listings">
-                                <li>
-                                    <div class="atbd_left_img">
-                                        <a href="#"><img src="img/sl1.jpg" alt="listing image"></a>
-                                    </div>
-                                    <div class="atbd_right_content">
-                                        <div class="cate_title">
-                                            <h4><a href="#">فروشگاه خرید پوشاک</a></h4>
-                                        </div>
-                                        <p class="listing_value">
-                                            <span>25000 تومان</span>
-                                        </p>
-                                        <p class="directory_tag">
-                                            <span class="la la-cutlery" aria-hidden="true"></span>
-                                            <span>
-                                <a href="#">غذا و نوشیدنی</a>
-                                <span class="atbd_cat_popup">+3
-                                    <span class="atbd_cat_popup_wrapper">
-                                        <span>
-                                            <a href="#">غذا<span>,</span></a>
-                                            <a href="#">سایر<span>,</span></a>
-                                            <a href="#">خدمات<span>,</span></a>
-                                        </span>
-                                    </span>
-                                </span><!-- ends: .atbd_cat_popup -->
-                            </span>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="atbd_left_img">
-                                        <a href="#"><img src="img/sl2.jpg" alt="listing image"></a>
-                                    </div>
-                                    <div class="atbd_right_content">
-                                        <div class="cate_title">
-                                            <h4><a href="#">سیستم های گرما و هوا فلندرز</a></h4>
-                                        </div>
-                                        <p class="listing_value">
-                                            <span>380000 تومان</span>
-                                        </p>
-                                        <p class="directory_tag">
-                                            <span class="la la-bed" aria-hidden="true"></span>
-                                            <span><a href="#">هتل و مسافرت</a></span>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="atbd_left_img">
-                                        <a href="#"><img src="img/sl3.jpg" alt="listing image"></a>
-                                    </div>
-                                    <div class="atbd_right_content">
-                                        <div class="cate_title">
-                                            <h4><a href="#">بانک فانتزی مکان مورد علاقه</a></h4>
-                                        </div>
-                                        <p class="listing_value">
-                                            <span>95000 تومان</span>
-                                        </p>
-                                        <p class="directory_tag">
-                                            <span class="la la-bookmark" aria-hidden="true"></span>
-                                            <span><a href="#">تاریخ و هنر</a></span>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="atbd_left_img">
-                                        <a href="#"><img src="img/sl4.jpg" alt="listing image"></a>
-                                    </div>
-                                    <div class="atbd_right_content">
-                                        <div class="cate_title">
-                                            <h4><a href="#">بانک فانتزی مکان مورد علاقه</a></h4>
-                                        </div>
-                                        <p class="listing_value">
-                                            <span>45000 تومان</span>
-                                        </p>
-                                        <p class="directory_tag">
-                                            <span class="la la-bookmark" aria-hidden="true"></span>
-                                            <span><a href="#">خرید</a></span>
-                                        </p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div> <!-- ends .atbd_similar_listings -->
-                    </div><!-- ends: .widget -->
-
-
-                    <div class="widget atbd_widget widget-card">
-                        <div class="atbd_widget_title">
-                            <h4><span class="la la-list-alt"></span> آگهی های محبوب</h4>
-                            <a href="#">نمایش همه</a>
+                            <h4><span class="la la-list-alt"></span> آخرین آگهی ها</h4>
                         </div><!-- ends: .atbd_widget_title -->
                         <div class="atbd_categorized_listings atbd_popular_listings">
-                            <ul class="listings">
-                                <li>
-                                    <div class="atbd_left_img">
-                                        <a href="#"><img src="img/sl5.jpg" alt="listing image"></a>
-                                    </div>
-                                    <div class="atbd_right_content">
-                                        <div class="cate_title">
-                                            <h4><a href="#">سیستم های گرما و هوا فلندرز</a></h4>
+                            {% for ad in advertise_list|slice:"0:3" %}
+                                <ul class="listings">
+                                    <li>
+                                        <div class="atbd_left_img">
+                                            <a href="{{ad.get_absolute_url}}"><img src="{{ ad.pic.url }}" alt="listing image" style="width: 70px;height: 70px;"></a>
                                         </div>
-                                        <p class="directory_tag">
-                                            <span class="la la-glass" aria-hidden="true"></span>
-                                            <span><a href="#">رستوران</a></span>
-                                        </p>
-                                        <div class="atbd_rated_stars">
-                                            <ul>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                            </ul>
+                                        <div class="atbd_right_content">
+                                            <div class="cate_title">
+                                                <h4><a href="{{ad.get_absolute_url}}"> {{ ad.title }}</a></h4>
+                                            </div>
+                                            <p class="directory_tag">
+                                                <span class="la la-glass" aria-hidden="true"></span>
+                                                <span><a href="#">رستوران</a></span>
+                                            </p>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="atbd_left_img">
-                                        <a href="#"><img src="img/sl6.jpg" alt="listing image"></a>
-                                    </div>
-                                    <div class="atbd_right_content">
-                                        <div class="cate_title">
-                                            <h4><a href="#">آژانس خدمات تخصصی</a></h4>
-                                        </div>
-                                        <p class="directory_tag">
-                                            <span class="la la-map-marker" aria-hidden="true"></span>
-                                            <span>
-                                <a href="#">مکان</a>
-                                <span class="atbd_cat_popup">+4
-                                    <span class="atbd_cat_popup_wrapper">
-                                        <span>
-                                            <a href="#">غذا<span>,</span></a>
-                                            <a href="#">سایر<span>,</span></a>
-                                            <a href="#">خدمات<span>,</span></a>
-                                            <a href="#">سفر<span>,</span></a>
-                                        </span>
-                                    </span>
-                                </span><!-- ends: .atbd_cat_popup -->
-                            </span>
-                                        </p>
-                                        <div class="atbd_rated_stars">
-                                            <ul>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_disable"></span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="atbd_left_img">
-                                        <a href="#"><img src="img/sl7.jpg" alt="listing image"></a>
-                                    </div>
-                                    <div class="atbd_right_content">
-                                        <div class="cate_title">
-                                            <h4><a href="#">رستوران برج میلاد</a></h4>
-                                        </div>
-                                        <p class="directory_tag">
-                                            <span class="la la-shopping-cart" aria-hidden="true"></span>
-                                            <span><a href="#">خرید</a></span>
-                                        </p>
-                                        <div class="atbd_rated_stars">
-                                            <ul>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_disable"></span></li>
-                                                <li><span class="rate_disable"></span></li>
-                                                <li><span class="rate_disable"></span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="atbd_left_img">
-                                        <a href="#"><img src="img/sl8.jpg" alt="listing image"></a>
-                                    </div>
-                                    <div class="atbd_right_content">
-                                        <div class="cate_title">
-                                            <h4><a href="#">اماکن معماری مورد علاقه</a></h4>
-                                        </div>
-                                        <p class="directory_tag">
-                                            <span class="la la-bank" aria-hidden="true"></span>
-                                            <span><a href="#">تاریخ و هنر</a></span>
-                                        </p>
-                                        <div class="atbd_rated_stars">
-                                            <ul>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_active"></span></li>
-                                                <li><span class="rate_disable"></span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
+                            {% endfor %}
                         </div> <!-- ends .atbd_similar_listings -->
                     </div><!-- ends: .widget -->
 

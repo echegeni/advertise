@@ -10,6 +10,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=30, verbose_name='نام')
     family = models.CharField(max_length=30, verbose_name='نام خانوادگی')
     email = models.EmailField(verbose_name='ایمیل')
+    pic = models.ImageField(upload_to='upload/profile/images', default='upload/images/no-img.jpg', verbose_name="تصویر")
     bio = models.TextField(max_length=500, blank=True, verbose_name='بیوگرافی')
     website = models.URLField(blank=True, verbose_name='وب سایت')
     phone = PhoneField(verbose_name="شماره تماس", blank=True)

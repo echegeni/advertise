@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'mptt',
     'phone_field',
     'account.apps.AccountConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/registration/login/'
 GOOGLE_MAPS_API_KEY = 'test'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'

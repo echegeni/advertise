@@ -84,6 +84,7 @@ class advertise(models.Model):
     email = models.EmailField(verbose_name='ایمیل')
     address = models.CharField(max_length=200, null=True, blank=True, verbose_name='آدرس')
     video = models.FileField(upload_to='upload/product/video', verbose_name="ویدئو", blank=True)
+    is_active_comment = models.BooleanField(default=False, blank=True, verbose_name="فعال کردن نظرات")
 
     # geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='موقعیت جغرافیایی')
 
@@ -96,3 +97,20 @@ class advertise(models.Model):
     class Meta:
         verbose_name = 'آگهی'
         verbose_name_plural = 'آگهی ها'
+        ordering = ('-publish_date',)
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
+    advertise = models.ForeignKey(advertise, on_delete=models.CASCADE, verbose_name="آگهی")
+    comment = models.TextField(max_length=500, verbose_name="نظر")
+    reply = models.TextField(max_length=500, blank=True, null=True, verbose_name="پاسخ")
+    is_active = models.BooleanField(default=False, verbose_name="فعال")
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
+    date_reply = models.DateTimeField(blank=True, null=True, verbose_name="تاریخ پاسخ")
+
+    def __str__(self):
+        return "{} from {}".format(self.comment[0:50], self.advertise)
+
+    class Meta:
+        verbose_name = 'نظر'
+        verbose_name_plural = 'نظرات'
