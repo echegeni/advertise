@@ -1,43 +1,36 @@
+from . import models
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from account.models import Profile
 
 
-class UserRegisterForm(UserCreationForm):
-    username = forms.CharField(
-        label='نام کاربری',
-        widget=forms.TextInput(
-            attrs={'class': "form-control mb-4", 'id': 'review_content', 'name': "content", 'placeholder': "نام کاربری"}))
-
-    email = forms.EmailField(
-        label='ایمیل',
-        widget=forms.EmailInput(
-            attrs={'class': "form-control mb-4", 'id': 'review_content', 'name': "content", 'placeholder': "ایمیل"}))
-
-    password1 = forms.CharField(
-        label='گذرواژه',
-        widget=forms.PasswordInput(
-            attrs={'class': "form-control mb-4", 'id': 'review_content', 'name': "content", 'placeholder': "گذرواژه"}))
-
-    password2 = forms.CharField(
-        label='تایید گذرواژه',
-        widget=forms.PasswordInput(
-            attrs={'class': "form-control mb-4", 'id': 'review_content', 'name': "content", 'placeholder': "برای تائید، رمز عبور قبلی را وارد کنید."}))
+class ProfileForm(forms.ModelForm):
+    email = forms.EmailField(widget=forms.EmailInput())
+    confirm_email = forms.EmailField(widget=forms.EmailInput())
+    bio = forms.Textarea()
 
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        model = models.Profile
+        fields = [
+            'name',
+            'family',
+            'email',
+            'pic',
+            'bio',
+            'website',
+            'phone',
+        ]
 
-class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
+    def clean(self):
+        cleaned_data = super(ProfileForm, self).clean()
+        email = cleaned_data.get("email")
+        confirm_email = cleaned_data.get("confirm_email")
+        bio = cleaned_data.get("bio")
 
-    class Meta:
-        model = User
-        fields = ['username', 'email']
+        if email != confirm_email:
+            raise forms.ValidationError(
+                "Emails must match!"
+            )
 
-
-class ProfileUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['pic', 'name', 'bio']
+        if len(bio) < 10:
+            raise forms.ValidationError(
+                "Bio must be 10 characters or longer!"
+            )

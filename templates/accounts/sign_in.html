@@ -1,5 +1,6 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load crispy_forms_filters %}
+
 {% block content %}
     <div class="breadcrumb-wrapper content_above">
         <div class="container">
@@ -28,19 +29,20 @@
                             <h4><span class="la la-unlock"></span>ورود</h4>
                         </div><!-- ends: .atbd_widget_title -->
                         <div class="atbdp-widget-listing-contact contact-form">
-                            <form action="" method="POST" id="atbdp-contact-form" class="form-vertical" role="form">
+                            <form action="{% url 'account:sign_in' %}" method="POST" id="atbdp-contact-form"
+                                  class="form-vertical" role="form">
                                 {% csrf_token %}
-                                {{ form|crispy  }}
+                                {{ form|crispy }}
                                 <button type="submit" class="btn btn-gradient btn-gradient-one btn-block mt-5 mb-5">ورود
                                 </button>
                             </form>
-                            <span class="text-center h3 mt-4">درصورتی که حساب کاربری ندارید <a href="{% url 'register' %}">ثبت نام</a> کنید </span>
+                            <span class="text-center h3 mt-4">درصورتی که حساب کاربری ندارید <a
+                                    href="{% url 'account:sign_up' %}">ثبت نام</a> کنید </span>
                         </div><!-- ends: .atbdp-widget-listing-contact -->
                     </div><!-- ends: .widget -->
                 </div><!-- ends: .col-lg-8 -->
             </div>
         </div>
     </section><!-- ends: .contact-area -->
-
 
 {% endblock %}

@@ -2,7 +2,6 @@ from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from django.urls import reverse
 from phone_field import PhoneField
-from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -70,7 +69,7 @@ class ImageGallery(models.Model):
 
 
 class advertise(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
+    user = models.OneToOneField('auth.user', on_delete=models.CASCADE, verbose_name='کاربر')
     slug = models.SlugField(max_length=30, verbose_name='اسلاگ', blank=True, auto_created=True)
     title = models.CharField(max_length=100, verbose_name='عنوان آکهی')
     content = models.TextField(verbose_name="توضیحات")
@@ -100,7 +99,7 @@ class advertise(models.Model):
         ordering = ('-publish_date',)
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
+    user = models.ForeignKey('auth.user', on_delete=models.CASCADE, verbose_name='کاربر')
     advertise = models.ForeignKey(advertise, on_delete=models.CASCADE, verbose_name="آگهی")
     comment = models.TextField(max_length=500, verbose_name="نظر")
     reply = models.TextField(max_length=500, blank=True, null=True, verbose_name="پاسخ")

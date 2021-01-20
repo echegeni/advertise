@@ -1,86 +1,105 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.utils import timezone
+from django.contrib.auth import (authenticate, login, logout,
+                                 update_session_auth_hash)
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from django.views.generic import DetailView
+from django.contrib.auth.forms import (AuthenticationForm, UserCreationForm,
+                                       PasswordChangeForm)
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+
+from . import models
+from . import forms
 
 
-# Create your views here.
-
-def register(request):
+def sign_in(request):
+    form = AuthenticationForm()
     if request.method == 'POST':
-        print("This shit is working bro.")
-        form = UserRegisterForm(request.POST)
-        # username = form.cleaned_data.get('username')
-        # print(username,"This shit is working")
-        # return redirect('/')
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            if form.user_cache is not None:
+                user = form.user_cache
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect(
+                        reverse('home')  # TODO: go to profile
+                    )
+                else:
+                    messages.error(
+                        request,
+                        "That user account has been disabled."
+                    )
+            else:
+                messages.error(
+                    request,
+                    "Username or password is incorrect."
+                )
+    return render(request, 'accounts/sign_in.html', {'form': form})
+
+
+def sign_up(request):
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(data=request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            print(username, "This shit is working")
-            messages.success(request, f'Account created for {username} successfully!')
-            return redirect('login')
-    else:
-        # If there is no a post request just send an empty form
-        form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password1']
+            )
+            login(request, user)
+            messages.success(
+                request,
+                "You're now a user! You've been signed in, too."
+            )
+            return HttpResponseRedirect(reverse('home'))  # TODO: go to profile
+    return render(request, 'accounts/sign_up.html', {'form': form})
 
 
-# The decoratior add functionality to the function is this case the login required functionality
-# @login_required
-# def profile(request, user):
-#     print(request.user.profile)
-#     print(type(request.user.profile))
+def sign_out(request):
+    logout(request)
+    messages.success(request, "You've been signed out. Come back soon!")
+    return HttpResponseRedirect(reverse('home'))
 
 
-# return render(request, 'users/profile.html')
+@login_required
+def profile(request):
+    """Display User Profile"""
+    profile = request.user.profile
+    return render(request, 'accounts/profile.html', {
+        'profile': profile
+    })
 
 
-class Profile(DetailView):
-    template_name = 'users/profile.html'
-    queryset = User.objects.all()
-    success_url = '/'
-
-    def get_object(self):
-        id_ = self.kwargs.get("username")
-        user = get_object_or_404(User, username=id_)
-        # print(request.user)
-        # print(user.profile.followed_by.all()[0])
-        # print(type(user.profile.followed_by.all()[0]))
-        return user
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(Profile, self).get_context_data(*args, **kwargs)
-        # user_id = self.kwargs.get('id')
-        # user = get_object_or_404(User,id=user_id)
-        user = self.get_object()
-        context.update({
-            'ads': user.advertise.all().filter(created_date__lte=timezone.now()).order_by('-publish_date')
-        })
-        return context
-
-
+@login_required
 def edit_profile(request):
-    if request.method == "POST":
+    user = request.user
+    profile = get_object_or_404(models.Profile, user=user)
+    form = forms.ProfileForm(instance=profile)
 
-        user_form = UserUpdateForm(request.POST, instance=request.user)
-        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+    if request.method == 'POST':
+        form = forms.ProfileForm(instance=profile, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Updated the Profile Successfully!")
+            return HttpResponseRedirect(reverse('accounts:profile'))
 
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
+    return render(request, 'accounts/edit_profile.html', {
+        'form': form
+    })
 
-            messages.success(request, f'Your account has been updated successfully!')
-            return redirect('profile')
 
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return HttpResponseRedirect(reverse('accounts:profile'))
     else:
-        user_form = UserUpdateForm(instance=request.user)
-        profile_form = ProfileUpdateForm(instance=request.user.profile)
-    context = {
-        'user_form': user_form,
-        'profile_form': profile_form,
-    }
-
-    return render(request, 'users/edit_profile.html', context)
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })
