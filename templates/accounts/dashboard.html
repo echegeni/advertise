@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="breadcrumb-wrapper content_above">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1 class="page-title">داشبورد</h1>
+                </div>
+            </div>
+        </div>
+    </div><!-- ends: .breadcrumb-wrapper -->
+
+    </section>
+
+
+    <section class="dashboard-wrapper section-bg p-bottom-70">
+        <div class="dashboard-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="dashboard-nav-area">
+                            <ul class="nav" id="dashboard-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="all-listings" data-toggle="tab" href="#listings"
+                                       role="tab" aria-controls="listings" aria-selected="true">آگهی های من</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab"
+                                       href="{% url 'account:profile' %}"
+                                       aria-controls="profile" aria-selected="false">پروفایل من</a>
+                                </li>
+                            </ul>
+
+                            <div class="nav_button">
+                                <a href="{% url 'account:profile' %}" class="btn btn-info">پروفایل</a>
+                                <a href="{% url 'account:edit_profile' %}" class="btn btn-success">ویرایش پروفایل</a>
+                                <a href="{% url 'account:sign_out' %}" class="btn btn-secondary">خروج</a>
+                            </div>
+                        </div>
+                    </div><!-- ends: .col-lg-12 -->
+                </div>
+            </div>
+        </div><!-- ends: .dashboard-nav -->
+        <div class="tab-content p-top-100" id="dashboard-tabs-content">
+            <div class="tab-pane fade show active" id="listings" role="tabpanel" aria-labelledby="all-listings">
+                <div class="container">
+                    <div class="row">
+                        {% for ad in ads %}
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="atbd_single_listing ">
+                                    <article class="atbd_single_listing_wrapper">
+                                        <figure class="atbd_listing_thumbnail_area">
+                                            <div class="atbd_listing_image">
+                                                <a href="{{ ad.get_absolute_url }}">
+                                                    <img src="{{ ad.pic.url }}" alt="{{ ad.title }}">
+                                                </a>
+                                            </div><!-- ends: .atbd_listing_image -->
+                                            <div class="atbd_author atbd_author--thumb">
+                                                <a href="#">
+                                                    <img src="{% static 'img/author-thumb2.jpg' %}" alt="Author Image">
+                                                    <span class="custom-tooltip">آرش، مالک</span>
+                                                </a>
+                                            </div>
+                                            <div class="atbd_thumbnail_overlay_content">
+                                                <ul class="atbd_upper_badge">
+                                                    <li><span class="atbd_badge atbd_badge_featured">ویژه</span></li>
+                                                </ul><!-- ends .atbd_upper_badge -->
+                                            </div><!-- ends: .atbd_thumbnail_overlay_content -->
+                                        </figure><!-- ends: .atbd_listing_thumbnail_area -->
+
+                                        <div class="atbd_listing_info">
+                                            <div class="atbd_content_upper">
+                                                <h4 class="atbd_listing_title">
+                                                    <a href="{{ ad.get_absolute_url }}">{{ ad.title }}</a>
+                                                </h4>
+
+                                                <div class="atbd_listing_meta">
+                                            <span class="atbd_meta atbd_listing_rating">4.5<i
+                                                    class="la la-star"></i></span>
+
+                                                    <span class="atbd_meta atbd_listing_price">{{ ad.price }} تومان</span>
+
+                                                </div><!-- End atbd listing meta -->
+                                                <div class="atbd_listing_data_list">
+                                                    <ul>
+                                                        <li>
+                                                            <p><span class="la la-map-marker"></span>{{ ad.city }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p><span class="la la-phone"></span>{{ ad.phone }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p><span class="la la-calendar-check-o"></span>ارسال شده
+                                                                در {{ ad.publish_date }}
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </div><!-- End atbd listing meta -->
+
+                                            </div><!-- end .atbd_content_upper -->
+
+                                            <div class="atbd_listing_bottom_content">
+                                                <div class="atbd_content_left">
+                                                    <div class="atbd_listing_category">
+                                                        <a href="#"><span class="la la-glass"></span>{{ ad.categorys }}
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                            </div><!-- end .atbd_listing_bottom_content -->
+                                        </div><!-- ends: .atbd_listing_info -->
+                                    </article><!-- atbd_single_listing_wrapper -->
+                                </div>
+                            </div><!-- ends: .col-lg-4 -->
+                        {% endfor %}
+                    </div>
+                </div>
+            </div><!-- ends: .tab-pane -->
+        </div>
+
+    </section>
+
+{% endblock %}
