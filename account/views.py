@@ -7,15 +7,15 @@ from django.contrib.auth.forms import (AuthenticationForm, UserCreationForm,
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-
-from . import models
+from app.models import advertise
 from . import forms
+from .models import Profile
 
 
 def sign_in(request):
-    form = AuthenticationForm()
+    form = forms.LoginForm()
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = forms.LoginForm(data=request.POST)
         if form.is_valid():
             if form.user_cache is not None:
                 user = form.user_cache
@@ -27,20 +27,20 @@ def sign_in(request):
                 else:
                     messages.error(
                         request,
-                        "That user account has been disabled."
+                        "حساب کاربری غیرفعال شده است"
                     )
             else:
                 messages.error(
                     request,
-                    "Username or password is incorrect."
+                    "نام کاربری یا رمزعبور نادرست است."
                 )
     return render(request, 'accounts/sign_in.html', {'form': form})
 
 
 def sign_up(request):
-    form = UserCreationForm()
+    form = forms.RegistrationForm()
     if request.method == 'POST':
-        form = UserCreationForm(data=request.POST)
+        form = forms.RegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
             user = authenticate(
@@ -50,7 +50,7 @@ def sign_up(request):
             login(request, user)
             messages.success(
                 request,
-                "You're now a user! You've been signed in, too."
+                "عضویت با موفقیت انجام شد در حال ورود به سایت"
             )
             return HttpResponseRedirect(reverse('home'))  # TODO: go to profile
     return render(request, 'accounts/sign_up.html', {'form': form})
@@ -58,7 +58,7 @@ def sign_up(request):
 
 def sign_out(request):
     logout(request)
-    messages.success(request, "You've been signed out. Come back soon!")
+    messages.success(request, "باموفقت خارج شدید.")
     return HttpResponseRedirect(reverse('home'))
 
 
@@ -66,22 +66,34 @@ def sign_out(request):
 def profile(request):
     """Display User Profile"""
     profile = request.user.profile
+    ads = advertise.objects.filter(user=profile.user)
     return render(request, 'accounts/profile.html', {
-        'profile': profile
+        'profile': profile,
+        'ads': ads
+    })
+
+@login_required
+def dashboard(request):
+    """Display User dashboard"""
+    profile = request.user.profile
+    ads = advertise.objects.filter(user=profile.user)
+    return render(request, 'accounts/dashboard.html', {
+        'profile': profile,
+        'ads': ads
     })
 
 
 @login_required
 def edit_profile(request):
     user = request.user
-    profile = get_object_or_404(models.Profile, user=user)
+    profile = get_object_or_404(Profile, user=user)
     form = forms.ProfileForm(instance=profile)
 
     if request.method == 'POST':
         form = forms.ProfileForm(instance=profile, data=request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Updated the Profile Successfully!")
+            messages.success(request, "پروفایل با موفقیت بروزرسانی شد.")
             return HttpResponseRedirect(reverse('accounts:profile'))
 
     return render(request, 'accounts/edit_profile.html', {
@@ -96,7 +108,7 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            messages.success(request, 'Your password was successfully updated!')
+            messages.success(request, 'رمز عبور با موفقیت بروزرسانی شد.')
             return HttpResponseRedirect(reverse('accounts:profile'))
     else:
         form = PasswordChangeForm(request.user)
