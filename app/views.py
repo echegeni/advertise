@@ -1,11 +1,14 @@
 from django.contrib import messages
 from django.db.models import Q
-from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.utils.encoding import uri_to_iri
 from .models import *
 from django.views.generic import *
 from .forms import *
 from django.views.generic.detail import SingleObjectMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from account.models import Profile
 
 
 # Create your views here.
@@ -85,6 +88,37 @@ class AdsandComment(View):
     def post(self, request, *args, **kwargs):
         view = Comment.as_view()
         return view(request, *args, **kwargs)
+
+
+class CreateAdvertise(LoginRequiredMixin, CreateView):
+    model = advertise
+    login_url = '/account/sign_in/'
+    redirect_field_name = 'home'
+    template_name = 'createad.html'
+    form_class = CreateAdvertise
+
+
+class AdvertiseList(ListView):
+    model = advertise
+    template_name = 'advertiselist.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['advertise'] = advertise.objects.all()
+        return context
+
+
+class DeleteAdvertise(LoginRequiredMixin, DeleteView):
+    template_name = 'deleteadvertise.html'
+    login_url = '/account/sign_in/'
+    redirect_field_name = 'home'
+
+    def get_object(self, **kwargs):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(advertise, slug=uri_to_iri(slug))
+
+    def get_success_url(self):
+        return reverse('account:dashboard')
 
 
 # city model views

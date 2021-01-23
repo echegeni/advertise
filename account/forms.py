@@ -86,7 +86,7 @@ class ProfileForm(forms.ModelForm):
         forms.NumberInput(attrs={'id': "title", 'class': "form-control", 'placeholder': "شماره تماس"})))
 
     pic = forms.ImageField(label='تصویر', widget=forms.FileInput(
-        attrs={'id': "listing_image_btn", 'class': "btn btn-outline-primary m-right-10", 'placeholder': "شماره تماس"}))
+        attrs={'id': "listing_image_btn", 'class': "btn btn-outline-primary m-right-10", 'placeholder': "تصویر"}))
 
     class Meta:
         model = models.Profile

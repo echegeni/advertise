@@ -73,17 +73,6 @@ def profile(request):
     })
 
 @login_required
-def dashboard(request):
-    """Display User dashboard"""
-    profile = request.user.profile
-    ads = advertise.objects.filter(user=profile.user)
-    return render(request, 'accounts/dashboard.html', {
-        'profile': profile,
-        'ads': ads
-    })
-
-
-@login_required
 def edit_profile(request):
     user = request.user
     profile = get_object_or_404(Profile, user=user)

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from mptt.models import MPTTModel, TreeForeignKey
 from django.urls import reverse
 from phone_field import PhoneField
@@ -69,8 +70,8 @@ class ImageGallery(models.Model):
 
 
 class advertise(models.Model):
-    user = models.OneToOneField('auth.user', on_delete=models.CASCADE, verbose_name='کاربر')
-    slug = models.SlugField(max_length=30, verbose_name='اسلاگ', blank=True, auto_created=True)
+    user = models.ForeignKey('auth.user', on_delete=models.CASCADE, verbose_name='کاربر')
+    slug = models.SlugField(max_length=30, verbose_name='اسلاگ', blank=True, null=True, unique=True, auto_created=True)
     title = models.CharField(max_length=100, verbose_name='عنوان آکهی')
     content = models.TextField(verbose_name="توضیحات")
     publish_date = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ انتشار")
@@ -97,6 +98,7 @@ class advertise(models.Model):
         verbose_name = 'آگهی'
         verbose_name_plural = 'آگهی ها'
         ordering = ('-publish_date',)
+
 
 class Comment(models.Model):
     user = models.ForeignKey('auth.user', on_delete=models.CASCADE, verbose_name='کاربر')

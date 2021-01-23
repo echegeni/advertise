@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="breadcrumb-wrapper content_above">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1 class="page-title">همه آگهی ها</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">همه آگهی ها</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div><!-- ends: .breadcrumb-wrapper -->
+
+    </section>
+
+
+    <section class="all-listing-wrapper section-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="atbd_generic_header">
+                        <div class="atbd_generic_header_title">
+                            <h4>همه موارد</h4>
+                            <p>مجموع آگهی یافت شده: 15</p>
+                        </div><!-- ends: .atbd_generic_header_title -->
+                    </div><!-- ends: .atbd_generic_header -->
+                </div><!-- ends: .col-lg-12 -->
+
+                <div class="col-lg-12 listing-items">
+                    <div class="row">
+                        <div class="col-lg-4 order-lg-0 order-1 mt-5 mt-lg-0">
+                            <div class="listings-sidebar">
+
+                                <div class="search-area default-ad-search">
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="به دنبال چه چیزی هستید؟"
+                                                   class="form-control">
+                                        </div><!-- ends: .form-group -->
+                                        <div class="form-group">
+                                            <div class="select-basic">
+                                                <select class="form-control ad_search_category">
+                                                    <option>انتخاب دسته</option>
+                                                    <option>رستوران</option>
+                                                    <option>&nbsp;&nbsp; غذا</option>
+                                                    <option>&nbsp;&nbsp; بسته نصبی</option>
+                                                    <option>مکان ها</option>
+                                                    <option>&nbsp;&nbsp; مسافرت</option>
+                                                    <option>&nbsp;&nbsp; رزرو</option>
+                                                    <option>&nbsp;&nbsp; هتل</option>
+                                                    <option>&nbsp;&nbsp; مکان</option>
+                                                    <option>خرید</option>
+                                                    <option>&nbsp;&nbsp; تجهیزات جانبی</option>
+                                                    <option>&nbsp;&nbsp; لباس</option>
+                                                    <option>&nbsp;&nbsp; گجت ها</option>
+                                                </select>
+                                            </div>
+                                        </div><!-- ends: .form-group -->
+                                        <div class="form-group">
+                                            <div class="position-relative">
+                                                <input type="text" placeholder="شهر، ایالت یا کد پستی"
+                                                       class="form-control location-name">
+                                                <button type="submit" class="locator"><span
+                                                        class="la la-crosshairs"></span>
+                                                </button>
+                                            </div>
+                                        </div><!-- ends: .form-group -->
+                                        <div class="form-group p-bottom-10">
+
+
+                                            <div class="price-range rs-primary">
+                                                <p class="d-flex justify-content-between">
+                                                    <span>حدود قیمت: </span>
+                                                    <span class="amount"></span>
+                                                </p>
+                                                <div class="slider-range"></div>
+                                            </div><!-- ends: .price-range -->
+
+                                        </div><!-- ends: .form-group -->
+                                        <div class="filter-checklist">
+                                            <h5>فیلتر توسط برچسب</h5>
+                                            <div class="checklist-items tags-checklist">
+
+
+                                                <div class="custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                                                    <input type="checkbox" class="custom-control-input" id="tag1"
+                                                           checked>
+                                                    <label class="custom-control-label" for="tag1">رستوران</label>
+                                                </div>
+
+
+                                                <div class="custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                                                    <input type="checkbox" class="custom-control-input" id="tag2">
+                                                    <label class="custom-control-label" for="tag2">غذا</label>
+                                                </div>
+
+
+                                                <div class="custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                                                    <input type="checkbox" class="custom-control-input" id="tag3">
+                                                    <label class="custom-control-label" for="tag3">ناهار</label>
+                                                </div>
+
+
+                                                <div class="custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                                                    <input type="checkbox" class="custom-control-input" id="tag4">
+                                                    <label class="custom-control-label" for="tag4">صبحانه</label>
+                                                </div>
+
+
+                                                <div class="custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                                                    <input type="checkbox" class="custom-control-input" id="tag5">
+                                                    <label class="custom-control-label" for="tag5">سبک زندگی</label>
+                                                </div>
+
+
+                                                <div class="custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                                                    <input type="checkbox" class="custom-control-input" id="tag6">
+                                                    <label class="custom-control-label" for="tag6">مسافرت</label>
+                                                </div>
+
+
+                                                <div class="custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                                                    <input type="checkbox" class="custom-control-input" id="tag7">
+                                                    <label class="custom-control-label" for="tag7">نوشیدنی</label>
+                                                </div>
+
+
+                                                <div class="custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                                                    <input type="checkbox" class="custom-control-input" id="tag8_1">
+                                                    <label class="custom-control-label" for="tag8_1">خدمات</label>
+                                                </div>
+
+
+                                                <div class="custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                                                    <input type="checkbox" class="custom-control-input" id="tag6_2">
+                                                    <label class="custom-control-label" for="tag6_2">رزرو</label>
+                                                </div>
+
+
+                                                <div class="custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                                                    <input type="checkbox" class="custom-control-input" id="tag7_3">
+                                                    <label class="custom-control-label" for="tag7_3">اجاره</label>
+                                                </div>
+
+
+                                                <div class="custom-control custom-checkbox checkbox-outline checkbox-outline-primary">
+                                                    <input type="checkbox" class="custom-control-input" id="tag8_2">
+                                                    <label class="custom-control-label" for="tag8_2">خرید</label>
+                                                </div>
+
+                                            </div>
+                                        </div><!-- ends: .filter-checklist -->
+                                        <a href="#"
+                                           class="btn btn-gradient btn-gradient-two btn-block btn-icon icon-right m-top-40">فیلتر
+                                            جستجو <span class="la la-long-arrow-right"></span></a>
+                                    </form><!-- ends: form -->
+                                </div><!-- ends: .default-ad-search -->
+
+                            </div>
+                        </div><!-- ends: .col-lg-4 -->
+                        <div class="col-lg-8 order-0 order-lg-1">
+                            <div class="row">
+                                {% for ads in advertise %}
+                                    <div class="col-lg-12">
+
+
+                                        <div class="atbd_single_listing atbd_listing_list">
+                                            <article class="atbd_single_listing_wrapper">
+                                                <figure class="atbd_listing_thumbnail_area">
+                                                    <div class="atbd_listing_image">
+                                                        <a href="{{ ads.get_absolute_url }}">
+                                                            <img src="{{ ads.pic.url }}" alt="{{ ads.title }}">
+                                                        </a>
+                                                    </div><!-- ends: .atbd_listing_image -->
+
+                                                    <div class="atbd_thumbnail_overlay_content">
+                                                        <ul class="atbd_upper_badge">
+                                                            <li><span class="atbd_badge atbd_badge_featured">ویژه</span>
+                                                            </li>
+                                                        </ul><!-- ends .atbd_upper_badge -->
+                                                    </div><!-- ends: .atbd_thumbnail_overlay_content -->
+                                                </figure><!-- ends: .atbd_listing_thumbnail_area -->
+
+                                                <div class="atbd_listing_info">
+                                                    <div class="atbd_content_upper">
+                                                        <h4 class="atbd_listing_title">
+                                                            <a href="{{ ads.get_absolute_url }}">{{ ads.title }}</a>
+                                                        </h4>
+
+                                                        <div class="atbd_listing_meta">
+                                                    <span class="atbd_meta atbd_listing_rating">4.5<i
+                                                            class="la la-star"></i></span>
+
+                                                            <span class="atbd_meta atbd_listing_price">{{ ads.price }} تومان</span>
+
+                                                        </div><!-- End atbd listing meta -->
+                                                        <div class="atbd_listing_data_list">
+                                                            <ul>
+                                                                <li>
+                                                                    <p><span
+                                                                            class="la la-map-marker"></span>{{ ads.city }}
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p><span class="la la-phone"></span>{{ ads.phone }}
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p><span class="la la-calendar-check-o"></span>ارسال
+                                                                        شده
+                                                                        در {{ ads.publish_date }}</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div><!-- End atbd listing meta -->
+
+                                                    </div><!-- end .atbd_content_upper -->
+
+                                                    <div class="atbd_listing_bottom_content">
+                                                        <div class="atbd_content_left">
+                                                            <div class="atbd_listing_category">
+                                                                <a href="#"><span
+                                                                        class="la la-glass"></span>{{ ads.category }}
+                                                                </a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- end .atbd_listing_bottom_content -->
+                                                </div><!-- ends: .atbd_listing_info -->
+                                            </article><!-- atbd_single_listing_wrapper -->
+                                        </div>
+
+                                    </div><!-- ends: .col-lg-12 -->
+                                {% endfor %}
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+
+                                    <nav class="navigation pagination d-flex justify-content-end" role="navigation">
+                                        <div class="nav-links">
+                                            <a class="prev page-numbers" href="#"><span
+                                                    class="la la-long-arrow-right"></span></a>
+                                            <a class="page-numbers" href="#">1</a>
+                                            <span aria-current="page" class="page-numbers current">2</span>
+                                            <a class="page-numbers" href="#">3</a>
+                                            <a class="next page-numbers" href="#"><span
+                                                    class="la la-long-arrow-left"></span></a>
+                                        </div>
+                                    </nav>
+
+                                </div>
+                            </div>
+                        </div><!-- ends: .col-lg-8 -->
+                    </div>
+                </div><!-- ends: .listing-items -->
+            </div>
+        </div>
+    </section><!-- ends: .all-listing-wrapper -->
+
+{% endblock %}
