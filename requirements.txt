@@ -8,4 +8,4 @@ django-phone-field==1.8.1
 mysqlclient==2.0.3
 Pillow==8.1.0
 pytz==2020.5
-sqlparse==0.4.1
+sqlparse==0.4.2
